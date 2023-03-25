@@ -1,0 +1,19 @@
+{
+    "name": "wpmetabox/mb-divi-integrator",
+    "description": "Connect Meta Box data with Divi Dynamic Content",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0",
+    "autoload": {
+        "psr-4": {
+            "MBDI\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Tan Nguyen",
+            "email": "hi@tan.ng"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
