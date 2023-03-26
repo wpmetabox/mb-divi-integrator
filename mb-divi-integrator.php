@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name: Meta Box - Divi Integrator
  * Plugin URI:  https://metabox.io/plugins/mb-divi-integrator/

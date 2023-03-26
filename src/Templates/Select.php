@@ -1,37 +1,33 @@
 <?php
+
 namespace MBDI\Templates;
 
-class Select extends Base
-{
-    /**
-     * Convert selected value to labels, separated by comma
-     * 
-     * @return string
-     */
-    public function render()
-    {
-        $value = $this->get_value();
-        
-        if (empty($value)) {
-            return '';
-        }
+class Select extends Base {
+	/**
+	 * Convert selected value to labels, separated by comma
+	 *
+	 * @return string
+	 */
+	public function render() {
+		$value = $this->get_value();
 
-        if (!is_array($value)) {
-            $value = [$value];
-        }
+		if ( empty( $value ) ) {
+			return '';
+		}
 
-        $field = $this->get_field();
-        
-        $options = $field['options'];
+		if ( ! is_array( $value ) ) {
+			$value = [ $value ];
+		}
 
-        $value = array_map(function($value) use ($options) {
-            return isset($options[$value]) ? $options[$value] : '';
-        }, $value);
+		$field = $this->get_field();
 
-        if (is_array($value)) {
-            $value = implode(', ', $value);
-        }
+		$options = $field['options'];
 
-        return $value;
-    }
+		$value = array_map( function ( $value ) use ( $options ) {
+			return $options[ $value ] ?? $value;
+		}, $value );
+
+
+		return implode( ', ', $value );
+	}
 }
