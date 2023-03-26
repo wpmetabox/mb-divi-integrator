@@ -5,15 +5,21 @@ class Main
 {
 	public function __construct()
 	{
+		add_action('init', [$this, 'init'], 20);
+	}
+
+	public function init()
+	{
+		if (!defined('RWMB_VER') || !defined('ET_BUILDER_VERSION')) {
+			return;
+		}
+
 		add_filter('et_builder_dynamic_content_meta_value', array($this, 'maybe_filter_dynamic_content_meta_value'), 10, 3);
 		add_filter('et_builder_custom_dynamic_content_fields', array($this, 'maybe_filter_dynamic_content_fields'), 10, 3);
 	}
 
-
 	/**
 	 * Format Meta Box meta values accordingly.
-	 *
-	 * @since 3.17.2
 	 *
 	 * @param string  $meta_value
 	 * @param string  $meta_key
@@ -82,68 +88,7 @@ class Main
 			return $value;
 		}
 
-		switch ($field['type']) {
-			case 'image':
-				$format = isset($field['return_format']) ? $field['return_format'] : 'url';
-				switch ($format) {
-					case 'array':
-						$value = esc_url(wp_get_attachment_url(intval($value['id'])));
-						break;
-					case 'id':
-						$value = esc_url(wp_get_attachment_url(intval($value)));
-						break;
-				}
-				break;
-
-			case 'select':
-			case 'checkbox':
-				$value = is_array($value) ? $value : array($value);
-				$value_labels = array();
-
-				foreach ($value as $value_key) {
-					$choice_label = isset($field['choices'][$value_key]) ? $field['choices'][$value_key] : '';
-					if (!empty($choice_label)) {
-						$value_labels[] = $choice_label;
-					}
-				}
-
-				$value = implode(', ', $value_labels);
-				break;
-
-			case 'true_false':
-				$value = et_builder_i18n($value ? 'Yes' : 'No');
-				break;
-
-			case 'taxonomy':
-				// If taxonomy configuration exist, get HTML output of given value (ids).
-				if (isset($field['taxonomy'])) {
-					$terms = get_terms(
-						array(
-							'taxonomy' => $field['taxonomy'],
-							'include' => $value,
-						)
-					);
-					$link = 'on';
-					$separator = ', ';
-
-					if (is_array($terms)) {
-						$value = et_builder_list_terms($terms, $link, $separator);
-					}
-				}
-				break;
-
-			default:
-				// Handle multiple values for which a more appropriate formatting method is not available.
-				if (isset($field['multiple']) && $field['multiple']) {
-					$value = implode(', ', $value);
-				}
-				break;
-		}
-
-		// Value escaping left to the user to decide since some fields hold rich content.
-		$value = et_core_esc_previously($value);
-
-		return $value;
+		return Output::from($value, $field);
 	}
 
 
@@ -250,7 +195,7 @@ class Main
 						),
 						// Set enable_html default to `on` for taxonomy fields so builder
 						// automatically renders taxonomy list properly as unescaped HTML.
-						'default' => 'taxonomy' === $field['type'] ? 'on' : 'off',
+						'default' => in_array($field['type'], ['taxonomy', 'taxonomy_advanced']) ? 'on' : 'off',
 						'show_on' => 'text',
 					);
 				}
