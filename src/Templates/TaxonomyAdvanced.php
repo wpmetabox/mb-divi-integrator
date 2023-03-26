@@ -15,6 +15,6 @@ class TaxonomyAdvanced extends Base
             $value = [$value];
         }
       
-        return et_builder_list_terms($value, 1, ', ');
+        return et_builder_list_terms($value, true, ', ');
     }
 }

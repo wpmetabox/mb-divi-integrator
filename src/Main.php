@@ -14,8 +14,8 @@ class Main
 			return;
 		}
 
-		add_filter('et_builder_dynamic_content_meta_value', array($this, 'maybe_filter_dynamic_content_meta_value'), 10, 3);
-		add_filter('et_builder_custom_dynamic_content_fields', array($this, 'maybe_filter_dynamic_content_fields'), 10, 3);
+		add_filter('et_builder_dynamic_content_meta_value', [$this, 'maybe_filter_dynamic_content_meta_value'], 10, 3);
+		add_filter('et_builder_custom_dynamic_content_fields', [$this, 'maybe_filter_dynamic_content_fields'], 10, 3);
 	}
 
 	/**
@@ -157,7 +157,7 @@ class Main
 			return $custom_fields;
 		}
 
-		foreach ($meta_boxes as $name => $meta_box) {
+		foreach ($meta_boxes as $meta_box) {
 			$meta_box = $meta_box->meta_box;
 
 			$fields = $this->flatten($meta_box['fields']);
@@ -207,7 +207,7 @@ class Main
 		return $custom_fields;
 	}
 
-	public function flatten($fields, $label_prefix = '')
+	protected function flatten($fields, $label_prefix = '')
 	{
 		$output = [];
 
