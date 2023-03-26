@@ -3,6 +3,13 @@ namespace MBDI;
 
 class Output
 {
+    /**
+     * Get output from field value.
+     * 
+     * @param  mixed  $value Field value.
+     * @param  array  $field Field settings.
+     * @return string        Output.
+     */
     public static function from($value, $field)
     {
         $template = self::get_template($field['type']);
@@ -12,6 +19,12 @@ class Output
         return et_core_esc_previously($rendered);
     }
 
+    /**
+     * Get template class name from field type.
+     * 
+     * @param  string $type Field type.
+     * @return string       Template class name.
+     */
     protected static function get_template($type)
     {
         $type = str_replace(' ', '', ucwords(str_replace('_', ' ', $type)));

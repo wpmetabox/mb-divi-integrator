@@ -14,7 +14,10 @@ class Main
 			return;
 		}
 
+		/** Render dynamic content placeholder and output */
 		add_filter('et_builder_dynamic_content_meta_value', [$this, 'maybe_filter_dynamic_content_meta_value'], 10, 3);
+
+		/** Add dynamic content fields */
 		add_filter('et_builder_custom_dynamic_content_fields', [$this, 'maybe_filter_dynamic_content_fields'], 10, 3);
 	}
 
@@ -36,6 +39,7 @@ class Main
 		$sub_type = $post_type;
 		$identifier = $post_id;
 
+		// If we're in Divi Builder, use the placeholder value.
 		if (et_theme_builder_is_layout_post_type($post_type)) {
 			return $this->format_placeholder_value($meta_key, $post_id);
 		}
@@ -59,7 +63,6 @@ class Main
 		if (false === $meta_box_value) {
 			return $meta_value;
 		}
-
 
 		$field_registry = rwmb_get_registry('field');
 		$field = $field_registry->get($meta_key, $object_type, $sub_type);
@@ -106,12 +109,12 @@ class Main
 		$field = $field_registry->get($meta_key, 'post');
 
 		if (!is_array($field) || empty($field['type'])) {
-			return esc_html__('Your Meta Box Field Value Will Display Here', 'meta-box');
+			return esc_html__('Your Meta Box Field Value Will Display Here', 'et_builder');
 		}
 
 		$value = esc_html(
 			sprintf(
-				__('Your "%1$s" Meta Box Field Value Will Display Here', 'meta-box'),
+				__('Your "%1$s" Meta Box Field Value Will Display Here', 'et_builder'),
 				$field['label']
 			)
 		);
@@ -126,9 +129,9 @@ class Main
 					implode(
 						', ',
 						array(
-							__('Category 1', 'meta-box'),
-							__('Category 2', 'meta-box'),
-							__('Category 3', 'meta-box'),
+							__('Category 1', 'et_builder'),
+							__('Category 2', 'et_builder'),
+							__('Category 3', 'et_builder'),
 						)
 					)
 				);
@@ -186,18 +189,18 @@ class Main
 				];
 
 				if (current_user_can('unfiltered_html')) {
-					$settings['fields']['enable_html'] = array(
+					$settings['fields']['enable_html'] = [
 						'label' => esc_html__('Enable raw HTML', 'et_builder'),
 						'type' => 'yes_no_button',
-						'options' => array(
+						'options' => [
 							'on' => et_builder_i18n('Yes'),
 							'off' => et_builder_i18n('No'),
-						),
+						],
 						// Set enable_html default to `on` for taxonomy fields so builder
 						// automatically renders taxonomy list properly as unescaped HTML.
 						'default' => in_array($field['type'], ['taxonomy', 'taxonomy_advanced']) ? 'on' : 'off',
 						'show_on' => 'text',
-					);
+					];
 				}
 
 				$custom_fields["custom_meta_{$field['id']}"] = $settings;
@@ -207,15 +210,27 @@ class Main
 		return $custom_fields;
 	}
 
+	/**
+	 * Flatten fields array. 
+	 * This is used to get all fields in a meta box, including fields in groups into a single dimensional array.
+	 * Fields in groups will have their label prefixed with the group label. For example: "Group: Field".
+	 * 
+	 * @param array  $fields
+	 * @param string $label_prefix Prefix for field label. Used for group fields.
+	 *
+	 * @return array
+	 */
 	protected function flatten($fields, $label_prefix = '')
 	{
 		$output = [];
 
 		foreach ($fields as $field) {
+			// Skip tab fields.
 			if ($field['type'] === 'tab') {
 				continue;
 			}
 
+			// Add prefix to field label. Top level fields will not have a prefix.
 			if (!in_array($field['type'], ['tab', 'group'])) {
 				$field['name'] = $label_prefix . $field['name'];
 			}

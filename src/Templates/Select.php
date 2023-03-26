@@ -3,6 +3,11 @@ namespace MBDI\Templates;
 
 class Select extends Base
 {
+    /**
+     * Convert selected value to labels, separated by comma
+     * 
+     * @return string
+     */
     public function render()
     {
         $value = $this->get_value();
