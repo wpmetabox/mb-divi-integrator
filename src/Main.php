@@ -41,6 +41,7 @@ class Main {
 		$object_type = 'post';
 		$sub_type    = $post_type;
 		$identifier  = $post_id;
+		$args = [];
 
 		// If we're in Divi Builder, use the placeholder value.
 		if ( et_theme_builder_is_layout_post_type( $post_type ) ) {
@@ -53,16 +54,22 @@ class Main {
 			$object_type = 'term';
 			$term        = get_queried_object();
 			$sub_type    = $term->taxonomy;
-			$identifier  = "{$term->taxonomy}_{$term->term_id}";
+			$identifier  = $term->term_id;
+			$args = [
+				'object_type' => 'term'
+			];
 		} elseif ( is_author() ) {
 			$object_type = 'user';
 			$sub_type    = 'user';
 			$user        = get_queried_object();
-			$identifier  = "user_{$user->ID}";
+			$identifier  = $user->ID;
+			$args = [
+				'object_type' => 'user'
+			];
 		}
 
-		$meta_box_value = rwmb_meta( $meta_key, [], $identifier );
-
+		$meta_box_value = rwmb_meta( $meta_key, $args, $identifier );
+		
 		if ( false === $meta_box_value ) {
 			return $meta_value;
 		}
