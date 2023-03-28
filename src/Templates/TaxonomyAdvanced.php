@@ -3,7 +3,7 @@
 namespace MBDI\Templates;
 
 class TaxonomyAdvanced extends Base {
-	public function render() {
+	public function render(): string {
 		$value = $this->get_value();
 
 		if ( empty( $value ) ) {

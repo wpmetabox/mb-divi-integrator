@@ -112,7 +112,7 @@ class Main {
 	 *
 	 * @return mixed
 	 */
-	protected function format_placeholder_value( $meta_key, $post_id ) {
+	protected function format_placeholder_value( string $meta_key, int $post_id ) {
 		$field_registry = rwmb_get_registry( 'field' );
 		$field          = $field_registry->get( $meta_key, 'post' );
 
@@ -136,11 +136,11 @@ class Main {
 				$value = esc_html(
 					implode(
 						', ',
-						array(
+						[
 							__( 'Category 1', 'et_builder' ),
 							__( 'Category 2', 'et_builder' ),
 							__( 'Category 3', 'et_builder' ),
-						)
+						]
 					)
 				);
 				break;
@@ -150,7 +150,7 @@ class Main {
 	}
 
 
-	public function maybe_filter_dynamic_content_fields( $custom_fields, $post_id, $raw_custom_fields ) {
+	public function maybe_filter_dynamic_content_fields( array $custom_fields, int $post_id, array $raw_custom_fields ): array {
 		if ( ! $post_id || et_theme_builder_is_layout_post_type( get_post_type( $post_id ) ) ) {
 			$post_id = 0;
 		}
@@ -158,7 +158,7 @@ class Main {
 		return $this->maybe_filter_dynamic_content_fields_from_groups( $custom_fields, $post_id, $raw_custom_fields );
 	}
 
-	public function maybe_filter_dynamic_content_fields_from_groups( $custom_fields, $post_id, $raw_custom_fields ) {
+	public function maybe_filter_dynamic_content_fields_from_groups( array $custom_fields, int $post_id, array $raw_custom_fields ): array {
 		$meta_box_registry = rwmb_get_registry( 'meta_box' );
 		$meta_boxes        = $meta_box_registry->all();
 
@@ -226,7 +226,7 @@ class Main {
 	 *
 	 * @return array
 	 */
-	protected function flatten( $fields, $label_prefix = '' ) {
+	protected function flatten( array $fields, string $label_prefix = '' ): array {
 		$output = [];
 
 		foreach ( $fields as $field ) {

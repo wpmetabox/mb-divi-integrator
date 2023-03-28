@@ -23,7 +23,7 @@ abstract class Base {
 	 * @param string|array|object $value Value retrieved from meta box.
 	 * @param array $field Field settings.
 	 */
-	public function __construct( $value, $field ) {
+	public function __construct( string $value, array $field ) {
 		$this->value = $value;
 		$this->field = $field;
 	}
@@ -33,7 +33,7 @@ abstract class Base {
 	 *
 	 * @return string|array|object
 	 */
-	public function get_value() {
+	public function get_value(): string {
 		return $this->value;
 	}
 
@@ -42,7 +42,7 @@ abstract class Base {
 	 *
 	 * @return array
 	 */
-	public function get_field() {
+	public function get_field(): array {
 		return $this->field;
 	}
 
@@ -51,5 +51,5 @@ abstract class Base {
 	 *
 	 * @return string
 	 */
-	abstract public function render();
+	abstract public function render(): string;
 }

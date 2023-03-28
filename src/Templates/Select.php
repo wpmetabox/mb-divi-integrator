@@ -8,7 +8,7 @@ class Select extends Base {
 	 *
 	 * @return string
 	 */
-	public function render() {
+	public function render(): string {
 		$value = $this->get_value();
 
 		if ( empty( $value ) ) {

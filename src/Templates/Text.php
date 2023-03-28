@@ -3,7 +3,7 @@
 namespace MBDI\Templates;
 
 class Text extends Base {
-	public function render() {
+	public function render(): string {
 		return $this->get_value();
 	}
 }

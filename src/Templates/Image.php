@@ -8,7 +8,7 @@ class Image extends Base {
 	 *
 	 * @return string
 	 */
-	public function render() {
+	public function render(): string {
 		$value = $this->get_value();
 		$value = array_keys( $value );
 
