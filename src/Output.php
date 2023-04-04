@@ -11,7 +11,7 @@ class Output {
 	 *
 	 * @return string        Output.
 	 */
-	public static function from( $value, $field ): string {
+	public static function from($value, array $field ): string {
 		$template = self::get_template( $field['type'] );
 		$template = new $template( $value, $field );
 		$rendered = $template->render();
@@ -26,7 +26,7 @@ class Output {
 	 *
 	 * @return string       Template class name.
 	 */
-	protected static function get_template( $type ): string {
+	protected static function get_template( string $type ): string {
 		$type     = str_replace( ' ', '', ucwords( str_replace( '_', ' ', $type ) ) );
 		$template = __NAMESPACE__ . '\\Templates\\' . $type;
 

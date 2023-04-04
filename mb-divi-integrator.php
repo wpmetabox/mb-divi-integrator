@@ -14,4 +14,6 @@ defined( 'ABSPATH' ) || die;
 
 require __DIR__ . '/vendor/autoload.php';
 
+define('MBDI_PATH', plugin_dir_path(__FILE__));
+
 new MBDI\Main;

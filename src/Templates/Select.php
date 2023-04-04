@@ -10,7 +10,7 @@ class Select extends Base {
 	 */
 	public function render(): string {
 		$value = $this->get_value();
-
+		
 		if ( empty( $value ) ) {
 			return '';
 		}
@@ -22,11 +22,10 @@ class Select extends Base {
 		$field = $this->get_field();
 
 		$options = $field['options'];
-
+		
 		$value = array_map( function ( $value ) use ( $options ) {
 			return $options[ $value ] ?? $value;
 		}, $value );
-
 
 		return implode( ', ', $value );
 	}
