@@ -67,7 +67,7 @@ class MBDI_Field extends ET_Builder_Module
 
             if ($array_field['type'] === 'group') {
                 $field_value = rwmb_meta($array, $args, $identifier);
-                $field_value = $field_value[$index][$meta_key];
+                $field_value = $field_value[$index][$meta_key] ?? '';
 
                 foreach ($array_field['fields'] as $f) {
                     if ($f['id'] === $meta_key) {
