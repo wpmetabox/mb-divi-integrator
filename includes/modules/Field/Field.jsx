@@ -1,8 +1,7 @@
-// External Dependencies
 import React, { Component } from 'react';
 
-class Cloneable extends Component {
-  static slug = 'mbdi_cloneable';
+class Field extends Component {
+  static slug = 'mbdi_field';
 
   componentDidMount() {
     fetch(window.etCore.ajaxurl + '?action=mb_divi_integrator_get_fields', {
@@ -16,8 +15,7 @@ class Cloneable extends Component {
           this.setState({
             fields: data.data,
           });
-
-          this.updateComputedFields();
+            this.updateComputedFields();
         }
       });
   }
@@ -27,10 +25,8 @@ class Cloneable extends Component {
       return;
     }
 
-    if (
-      this.props.layout !== prevProps.layout ||
-      this.props.field !== prevProps.field
-    ) {
+    console.log(this.props.metabox_field_id);
+    if (this.props.metabox_field_id !== prevProps.metabox_field_id) {
       this.updateComputedFields();
     }
   }
@@ -43,14 +39,12 @@ class Cloneable extends Component {
     }
 
     // Update computed fields
-    const selectedLayout =
-      fields.layout_options[this.props.layout] || fields.layout_options[0];
     const selectedField =
-      fields.cloneable_field_options[this.props.field] ||
-      fields.cloneable_field_options[0];
+      fields.field_options[this.props.metabox_field_id] ||
+      fields.field_options[0];
 
+      console.log(this.selectedField);
     this.setState({
-      selectedLayout,
       selectedField,
     });
   }
@@ -58,14 +52,10 @@ class Cloneable extends Component {
   render() {
     return (
       <div className="mbdi-field">
-        {!this.state && (
-          <div className="mbdi-field__title">Meta Box Cloneable</div>
-        )}
-
-        {this.state && this.state.selectedLayout && this.state.selectedField && (
+        {!this.state && <div className="mbdi-field__title">Meta Box Field</div>}
+        {this.state && (
           <div className="mbdi-field__title">
-            Meta Box Cloneable: {this.state.selectedLayout} <em>on</em>{' '}
-            {this.state.selectedField}
+            Meta Box Field: {this.state.selectedField}
           </div>
         )}
       </div>
@@ -73,4 +63,4 @@ class Cloneable extends Component {
   }
 }
 
-export default Cloneable;
+export default Field;

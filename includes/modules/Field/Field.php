@@ -1,5 +1,6 @@
 <?php
 
+use MBDI\Extension;
 use MBDI\FieldQuery;
 use MBDI\Output;
 
@@ -22,9 +23,8 @@ class MBDI_Field extends ET_Builder_Module
 
     public function get_fields()
     {
-        $query = new MBDI\FieldQuery();
-        $fields = $query->pluck('name', 'id');
-        $options = array_merge(['' => esc_html__('Select a field', 'mbdi')], $fields);
+        $fields = Extension::get_fields();
+        $options = $fields['field_options'];
 
         return [
             'metabox_field_id' => [

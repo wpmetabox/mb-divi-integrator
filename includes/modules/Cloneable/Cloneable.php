@@ -1,11 +1,13 @@
 <?php
 
+use MBDI\Extension;
+
 class MBDI_Clonable extends ET_Builder_Module
 {
 
 	public $slug       = 'mbdi_cloneable';
 	public $vb_support = 'on';
-	
+
 	protected $module_credits = [
 		'module_uri' => 'https://metabox.io/plugins/mb-divi-integrator',
 		'author'     => '',
@@ -20,25 +22,9 @@ class MBDI_Clonable extends ET_Builder_Module
 	public function get_fields()
 	{
 		// Get all divi layouts.
-		$layouts = get_posts([
-			'post_type' => 'et_pb_layout',
-			'posts_per_page' => -1,
-		]);
-
-		$options = [];
-		$options[''] = esc_html__('Select a layout', 'mbdi');
-
-		foreach ($layouts as $layout) {
-			$options[$layout->ID] = $layout->post_title;
-		}
-
-		// Get all cloneable fields from Meta Box.
-		$query = new MBDI\FieldQuery([
-			'clone' => true,
-		]);
-
-		$fields = $query->pluck('name', 'id');
-		$fields = array_merge(['' => esc_html__('Select a field', 'mbdi')], $fields);
+		$fields = Extension::get_fields();
+		$options = $fields['layout_options'];
+		$fields = $fields['cloneable_field_options'];
 
 		return [
 			'layout' => [
@@ -81,7 +67,7 @@ class MBDI_Clonable extends ET_Builder_Module
 
 		// Check if the field is cloneable.
 		$field = $field_registry->get($cloneable_field, $object_type, $sub_type);
-	
+
 		if (!$field || !$field['clone']) {
 			return;
 		}

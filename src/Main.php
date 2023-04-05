@@ -148,12 +148,12 @@ class Main
 		$field          = $field_registry->get($meta_key, 'post');
 
 		if (!is_array($field) || empty($field['type'])) {
-			return esc_html__('Your Meta Box Field Value Will Display Here', 'et_builder');
+			return esc_html__('Your Meta Box Field Value Will Display Here', 'mbdi');
 		}
 
 		$value = esc_html(
 			sprintf(
-				__('Your "%1$s" Meta Box Field Value Will Display Here', 'et_builder'),
+				__('Your "%1$s" Meta Box Field Value Will Display Here', 'mbdi'),
 				$field['label']
 			)
 		);

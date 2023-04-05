@@ -110,6 +110,10 @@ class FieldQuery
                 }
             }
 
+            if (isset($this->filters['not_type']) && in_array($field['type'], $this->filters['not_type'])) {
+                continue;
+            }
+
             $output[] = $field;
         }
 
