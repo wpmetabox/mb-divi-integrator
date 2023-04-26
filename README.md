@@ -72,13 +72,13 @@ To use this module:
 ├── styles # divi-scripts built styles
 ├── includes # Divi module files, this folder is created by `divi-scripts`
 ├── images # Images for README.md
-
+```
 
 ### Divi Modules
 Divi uses React to build the UI. It setups it own scripts `divi-scripts` same as `create-react-app` and uses `webpack` to build the scripts. 
 
 Requirements:
-- Node.js 14.x (higher version doesn't works!!!)
+- Node.js 14.x *(higher version doesn't works!!!)*
 
 The recommended way to build the scripts is using `nvm` or `fnm` to install Node.js 14.x and use `npm` to build the scripts.
 
