@@ -25,7 +25,6 @@ class Field extends Component {
       return;
     }
 
-    console.log(this.props.metabox_field_id);
     if (this.props.metabox_field_id !== prevProps.metabox_field_id) {
       this.updateComputedFields();
     }
@@ -42,8 +41,7 @@ class Field extends Component {
     const selectedField =
       fields.field_options[this.props.metabox_field_id] ||
       fields.field_options[0];
-
-      console.log(this.selectedField);
+      
     this.setState({
       selectedField,
     });

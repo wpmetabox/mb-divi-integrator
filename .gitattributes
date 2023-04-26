@@ -8,3 +8,4 @@
 /.github export-ignore
 .gitignore export-ignore
 .composer.json export-ignore
+/images export-ignore
