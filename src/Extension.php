@@ -60,7 +60,7 @@ class Extension extends \DiviExtension
         ]);
 
         $layout_options = [];
-        $layout_options[''] = esc_html__('Select a layout', 'mbdi');
+        $layout_options[0] = esc_html__('Select a layout', 'mbdi');
 
         foreach ($layouts as $layout) {
             $layout_options[$layout->ID] = $layout->post_title;
