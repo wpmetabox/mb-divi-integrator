@@ -10,7 +10,7 @@ class SingleImage extends Base {
 	 */
 	public function render(): string {
 		$value = $this->get_value();
-
-		return wp_get_attachment_image( intval( $value ) );
+		
+		return $value['url'] ?? '';
 	}
 }
