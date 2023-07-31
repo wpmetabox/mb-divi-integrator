@@ -9,7 +9,6 @@ class FieldQuery
 
     private $unsupported_fields = [
         'divider',
-        'heading',
         'tab',
     ];
 

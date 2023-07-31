@@ -29,7 +29,7 @@ class Output {
 	protected static function get_template( string $type ): string {
 		$type     = str_replace( ' ', '', ucwords( str_replace( '_', ' ', $type ) ) );
 		$template = __NAMESPACE__ . '\\Templates\\' . $type;
-
+		
 		if ( class_exists( $template ) ) {
 			return $template;
 		}

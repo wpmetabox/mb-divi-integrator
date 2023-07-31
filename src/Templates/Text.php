@@ -4,6 +4,14 @@ namespace MBDI\Templates;
 
 class Text extends Base {
 	public function render(): string {
-		return $this->get_value();
+		if (is_string($this->get_value())) { 
+			return $this->get_value();
+		}
+
+		if (is_array($this->get_value())) {
+			return implode(', ', $this->get_value());
+		}
+
+		return '';
 	}
 }
