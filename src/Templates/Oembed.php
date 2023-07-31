@@ -2,8 +2,8 @@
 
 namespace MBDI\Templates;
 
-class ImageAdvanced extends Text {
-	public function render() {
+class Oembed extends Text {
+	public function render(): string {
         $value = $this->get_value();
 
         if (is_array($value)) {
