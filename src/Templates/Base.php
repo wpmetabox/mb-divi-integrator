@@ -18,14 +18,22 @@ abstract class Base {
 	protected $field;
 
 	/**
+	 * Raw value.
+	 *
+	 * @var bool
+	 */
+	protected $raw;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param string|array|object $value Value retrieved from meta box.
 	 * @param array $field Field settings.
 	 */
-	public function __construct($value, array $field ) {
+	public function __construct($value, array $field, $raw = true ) {
 		$this->value = $value;
 		$this->field = $field;
+		$this->raw = $raw;
 	}
 
 	/**
@@ -44,6 +52,15 @@ abstract class Base {
 	 */
 	public function get_field(): array {
 		return $this->field;
+	}
+
+	/**
+	 * Get raw value.
+	 *
+	 * @return bool
+	 */
+	public function get_raw(): bool {
+		return $this->raw;
 	}
 
 	/**

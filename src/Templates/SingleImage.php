@@ -11,6 +11,8 @@ class SingleImage extends Base {
 	public function render(): string {
 		$value = $this->get_value();
 		
-		return $value['url'] ?? '';
+		$url = $value['url'] ?? '';
+
+        return $this->raw ? $url : '<img src="' . esc_url( $url ) . '" alt="' . esc_attr( $value['alt'] ?? '' ) . '" />';
 	}
 }

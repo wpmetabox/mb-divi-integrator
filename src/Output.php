@@ -11,9 +11,9 @@ class Output {
 	 *
 	 * @return string        Output.
 	 */
-	public static function from($value, array $field ): string {
+	public static function from($value, array $field, $raw = true ): string {
 		$template = self::get_template( $field['type'] );
-		$template = new $template( $value, $field );
+		$template = new $template( $value, $field, $raw );
 		$rendered = $template->render();
 
 		return et_core_esc_previously( $rendered );

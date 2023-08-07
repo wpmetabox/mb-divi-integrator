@@ -9,6 +9,7 @@ class File extends Base {
 		if ( empty( $value ) || !is_array($value) ) {
 			return '';
 		}
+		
         return "<a href='{$value['url']}' target='_blank'>{$value['title']}</a>\n";
 	}
 }

@@ -81,8 +81,12 @@ class MBDI_Field extends ET_Builder_Module
                 $field  = $field_registry->get($meta_key, $object_type, $sub_type);
             }
         }
+        
+        if (!$field) {
+            return;
+        }
 
-        return Output::from($field_value, $field);
+        return Output::from($field_value, $field, false);
     }
 }
 

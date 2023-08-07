@@ -14,14 +14,8 @@ class TextList extends Base {
             $value = [ $value ];
         }
 
-        if ( ! is_array( $value[0] ) ) {
-            $value = [ $value ];
-        }
+        $value = array_map( 'esc_html', $value );
 
-        $texts = array_map(function($item) {
-            return $item[0] . ': ' . $item[1];
-        }, $value);
-
-        return implode(', ', $texts);
+        return '<ul><li>' . implode( '</li><li>', $value ) . '</li></ul>';
     }
 }
