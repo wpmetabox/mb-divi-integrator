@@ -10,15 +10,15 @@ class FileAdvanced extends Base {
 	 */
 	public function render(): string {
 		$value = $this->get_value();
-		
+
 		if ( empty( $value ) || !is_array($value) ) {
 			return '';
 		}
-
+		
 		$value = array_map( function ( $value ) {
-            return "<a href='{$value['url']}' target='_blank'>{$value['title']}</a>\n";
+            return "<a href='{$value['url']}' target='_blank' title={$value['title']}>{$value['title']}</a>\n";
         }, $value );
 
-        return implode( ', ', $value );
+        return '<ul><li>' . implode( '</li><li>', $value ) . '</li></ul>';
 	}
 }
