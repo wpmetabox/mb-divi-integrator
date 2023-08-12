@@ -46,20 +46,69 @@ class MBDI_Field extends ET_Builder_Module
         $array = $attrs['array'] ?? null;
 
         $meta_key = $this->props['metabox_field_id'];
-        $post_id = $wp_query->get_queried_object_id();
 
-        $post_type   = get_post_type($post_id);
-        $object_type = 'post';
-        $sub_type    = $post_type;
-        $identifier  = $post_id;
-        $args = [];
-        $field_registry = rwmb_get_registry('field');
+        $post_id = get_the_ID();
+		$post_type   = get_post_type($post_id);
+		$object_type = 'post';
+		$sub_type    = $post_type;
+		$identifier  = $post_id;
+		$args = [];
 
-        // Single field.
-        if (is_null($index)) {
-            $field_value = rwmb_meta($meta_key, $args, $identifier);
-            $field  = $field_registry->get($meta_key, $object_type, $sub_type);
-        }
+		$is_blog_query = isset($wp_query->et_pb_blog_query) && $wp_query->et_pb_blog_query;
+
+		if (!$is_blog_query && (is_category() || is_tag() || is_tax())) {
+			$object_type = 'term';
+			$term        = get_queried_object();
+			$sub_type    = $term->taxonomy;
+			$identifier  = $term->term_id;
+			$args = [
+				'object_type' => 'term'
+			];
+		} elseif (is_author()) {
+			$object_type = 'user';
+			$sub_type    = 'user';
+			$user        = get_queried_object();
+			$identifier  = $user->ID;
+			$args = [
+				'object_type' => 'user'
+			];
+		}
+
+		$field_registry = rwmb_get_registry('field');
+
+		// If $meta_key contains dot (.), it's a sub-field.
+		// We need to get the parent field first.
+		if (false !== strpos($meta_key, '.')) {
+			$group_key = explode('.', $meta_key)[0];
+			$nested_key = explode('.', $meta_key)[1];
+
+			$group_field    = $field_registry->get($group_key, $sub_type, $object_type);
+            
+            // Find the field in the group.
+            foreach ($group_field['fields'] as $f) {
+                if ($f['id'] === $nested_key) {
+                    $field = $f;
+                    break;
+                }
+            }            
+
+			$group_cloneable = $group_field['clone'] ?? false;
+
+			$group_value = rwmb_meta($group_key, $args, $identifier);
+
+			if (!is_array($group_value)) {
+				return '';
+			}
+
+			if ($group_cloneable) {
+				$group_value = $group_value[0];
+			}
+
+			$field_value = $group_value[$nested_key] ?? '';
+		} else {
+			$field_value = rwmb_meta($meta_key, $args, $identifier);
+			$field          = $field_registry->get($meta_key, $sub_type, $object_type);
+		}
 
         // Cloneable field.
         if (is_numeric($index)) {

@@ -11,7 +11,9 @@ class Image extends Base {
 	public function render(): string {
 		$value = $this->get_value();
 		$value = array_keys( $value );
+		
+		$url = wp_get_attachment_url( intval( $value[0] ) );
 
-		return esc_url( wp_get_attachment_url( intval( $value[0] ) ) );
+		return $this->raw ? $url : '<img src="' . esc_url( $url ) . '" alt="' . esc_attr( $value['alt'] ?? '' ) . '" />';
 	}
 }

@@ -34,7 +34,7 @@ class FieldQuery
             $meta_box = $meta_box->meta_box;
             $fields = array_merge($fields, $this->flatten($meta_box['fields']));
         }
-        
+   
         $this->fields = $fields;
 
         return $this;
@@ -69,7 +69,7 @@ class FieldQuery
             if (!isset($field[$value]) || empty($field[$value])) {
                 continue;
             }
-
+            
             if (isset($key)) {
                 $output[$field[$key]] = $field[$value];
             } else {
@@ -99,6 +99,7 @@ class FieldQuery
 
             if ($parent) {
                 $field['name'] = $parent['name'] . ': ' . $field['name'];
+                $field['id'] = $parent['id'] . '.' . $field['id'];
             }
 
             $accepted_filters = ['clone', 'type'];
