@@ -75,13 +75,13 @@ class MBDI_Field extends ET_Builder_Module
 		}
 
 		$field_registry = rwmb_get_registry('field');
-
+        
 		// If $meta_key contains dot (.), it's a sub-field.
 		// We need to get the parent field first.
 		if (false !== strpos($meta_key, '.')) {
 			$group_key = explode('.', $meta_key)[0];
 			$nested_key = explode('.', $meta_key)[1];
-
+            
 			$group_field    = $field_registry->get($group_key, $sub_type, $object_type);
             
             // Find the field in the group.
@@ -126,7 +126,11 @@ class MBDI_Field extends ET_Builder_Module
                 }
             } else {
                 $field_value = rwmb_meta($meta_key, $args, $identifier);
-                $field_value = $field_value[$index];
+
+                if (is_array($field_value) && isset($field_value[$index])) {
+                    $field_value = $field_value[$index];
+                }
+                
                 $field  = $field_registry->get($meta_key, $object_type, $sub_type);
             }
         }
