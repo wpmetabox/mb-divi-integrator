@@ -10,6 +10,6 @@ class Oembed extends Text {
             $value = $value[0];
         }
 
-        return $value['url'] ?? '';
+        return $value ?? '';
     }
 }
