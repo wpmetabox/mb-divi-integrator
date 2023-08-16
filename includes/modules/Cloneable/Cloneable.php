@@ -53,7 +53,7 @@ class MBDI_Clonable extends ET_Builder_Module
 
 		$post_type   = get_post_type($post_id);
 		$object_type = 'post';
-		$sub_type    = 'post';
+		$sub_type    = $post_type;
 		$identifier  = $post_id;
 		$args = [];
 
@@ -85,7 +85,7 @@ class MBDI_Clonable extends ET_Builder_Module
 
 		$field_registry = rwmb_get_registry('field');
 		// Check if the field is cloneable.
-		$field = $field_registry->get($cloneable_field, $object_type, $sub_type);
+		$field = $field_registry->get($cloneable_field, $sub_type, $object_type);
 
 		if (!$field || !$field['clone']) {
 			return;
