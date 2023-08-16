@@ -12,6 +12,10 @@ class Output {
 	 * @return string        Output.
 	 */
 	public static function from($value, array $field, $raw = true ): string {
+		if ( empty( $value ) ) {
+			return '';
+		}
+		
 		$template = self::get_template( $field['type'] );
 		$template = new $template( $value, $field, $raw );
 		$rendered = $template->render();

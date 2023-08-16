@@ -45,7 +45,7 @@ class Main
 
 		$post_type   = get_post_type($post_id);
 		$object_type = 'post';
-		$sub_type    = $post_type;
+		$sub_type    = 'post';
 		$identifier  = $post_id;
 		$args = [];
 

@@ -53,31 +53,50 @@ class MBDI_Clonable extends ET_Builder_Module
 
 		$post_type   = get_post_type($post_id);
 		$object_type = 'post';
-		$sub_type    = $post_type;
+		$sub_type    = 'post';
 		$identifier  = $post_id;
 		$args = [];
 
-		$cloneable_field = $this->props['field'];
+		$is_blog_query = isset($wp_query->et_pb_blog_query) && $wp_query->et_pb_blog_query;
 
+		if (!$is_blog_query && (is_category() || is_tag() || is_tax())) {
+			$object_type = 'term';
+			$term        = get_queried_object();
+			$sub_type    = $term->taxonomy;
+			$identifier  = $term->term_id;
+			$args = [
+				'object_type' => 'term'
+			];
+		} elseif (is_author()) {
+			$object_type = 'user';
+			$sub_type    = 'user';
+			$user        = get_queried_object();
+			$identifier  = $user->ID;
+			$args = [
+				'object_type' => 'user'
+			];
+		}
+
+		$cloneable_field = $this->props['field'];
+		
 		if (!$cloneable_field) {
 			return;
 		}
 
 		$field_registry = rwmb_get_registry('field');
-
 		// Check if the field is cloneable.
 		$field = $field_registry->get($cloneable_field, $object_type, $sub_type);
 
 		if (!$field || !$field['clone']) {
 			return;
 		}
-
+		
 		// Get all groups.
 		$groups = rwmb_meta($cloneable_field, $args, $identifier);
 
 		$layout = $this->props['layout'];
 
-		if (!$layout) {
+		if (!$layout || empty($groups)) {
 			return;
 		}
 
@@ -85,7 +104,7 @@ class MBDI_Clonable extends ET_Builder_Module
 
 		$content = $layout->post_content;
 		$output = '';
-
+		
 		// Loop through each group.
 		foreach ($groups as $index => $group) {
 			// Add index and cloneable field name to each field so children fields can know 

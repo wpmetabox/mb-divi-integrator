@@ -50,7 +50,7 @@ class MBDI_Field extends ET_Builder_Module
         $post_id = get_the_ID();
 		$post_type   = get_post_type($post_id);
 		$object_type = 'post';
-		$sub_type    = $post_type;
+		$sub_type    = 'post';
 		$identifier  = $post_id;
 		$args = [];
 
@@ -75,15 +75,15 @@ class MBDI_Field extends ET_Builder_Module
 		}
 
 		$field_registry = rwmb_get_registry('field');
-        
+  
 		// If $meta_key contains dot (.), it's a sub-field.
 		// We need to get the parent field first.
 		if (false !== strpos($meta_key, '.')) {
 			$nested = $this->get_nested_value($meta_key, $field_registry, $sub_type, $object_type, $args, $identifier);
-            $field_value = $nested['field_value'];
+            $field_value = $nested['field_value'] ?? '';
             $field = $nested['field'];
 		} else {
-			$field_value = rwmb_meta($meta_key, $args, $identifier);
+			$field_value    = rwmb_meta($meta_key, $args, $identifier);
 			$field          = $field_registry->get($meta_key, $sub_type, $object_type);
 		}
 
@@ -123,18 +123,18 @@ class MBDI_Field extends ET_Builder_Module
                 $field = $f;
                 break;
             }
-        }            
+        }
 
         $group_cloneable = $group_field['clone'] ?? false;
 
         $group_value = rwmb_meta($group_key, $args, $identifier);
 
         if (!is_array($group_value)) {
-            return '';
+            $field_value = '';
         }
 
         if ($group_cloneable) {
-            $group_value = $group_value[$index];
+            $group_value = $group_value[$index] ?? '';
         }
 
         $field_value = $group_value[$nested_key] ?? '';
