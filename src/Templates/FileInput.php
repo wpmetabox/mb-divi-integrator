@@ -2,7 +2,7 @@
 
 namespace MBDI\Templates;
 
-class FileInput extends Base {
+class FileInput extends File {
 	/**
 	 * Convert selected value to labels, separated by comma
 	 *
@@ -10,7 +10,25 @@ class FileInput extends Base {
 	 */
 	public function render(): string {
 		$value = $this->get_value();
+
+		if (!is_array($value)) {
+			$value = [$value];
+		}
+
+		if ($this->raw) {
+			return $value[0];
+		}
+
+		$output = '<div class="mbdi-file-wrapper">';
+		$output .= '<ul class="mbdi-file-group">';
 		
-		return $this->raw ? esc_url($value) : "<a href='{$value}' target='_blank'>{$value}</a>\n";
+		foreach ($value as $file) {
+			$output .= '<li><a href="' . esc_url( $file ) . '" title="' . esc_attr( $file ) . '">'. $file .'</a></li>';
+		}
+		
+		$output .= '</ul>';
+		$output .= '</div>';
+
+		return $output;
 	}
 }

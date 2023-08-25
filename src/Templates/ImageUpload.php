@@ -2,5 +2,5 @@
 
 namespace MBDI\Templates;
 
-class ImageUpload extends ImageAdvanced {
+class ImageUpload extends Image {
 }
