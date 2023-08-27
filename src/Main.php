@@ -130,7 +130,12 @@ class Main
 			return $value;
 		}
 
-		return Output::from($value, $field);
+		return Output::from([
+			'value' => $value,
+			'field' => $field,
+			'attrs' => [],
+			'raw'   => false,
+		]);
 	}
 
 

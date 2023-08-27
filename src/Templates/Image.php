@@ -15,10 +15,11 @@ class Image extends Base {
 			return $value[0][0]['full_url'] ?? '';
 		}
 
+		$items_per_row = $this->attrs['items_per_row'] ?? 3;
 		$output = '<div class="mbdi-images-wrapper">';
 
 		foreach ($value as $images) {
-			$output .= '<ul class="mbdi-images-group">';
+			$output .= '<ul class="mbdi-images-group mbdi-grid mbdi-grid-columns-'. $items_per_row .'">';
 			
 			foreach ($images as $image) {
 				$output .= '<li><img src="' . esc_url( $image['full_url'] ) . '" alt="' . esc_attr( $image['alt'] ?? '' ) . '" /></li>';
@@ -46,7 +47,7 @@ class Image extends Base {
 			// Make group field compatible with group cloneable field
 			if (is_numeric($value[0])) {
 				$value = [$value];
-			}			
+			}
 			
 			// Non-group field returns an array of images and clonable. We need to re-index the array.
 			if (is_array($value[0])) {

@@ -6,18 +6,20 @@ class Output {
 	/**
 	 * Get output from field value.
 	 *
-	 * @param mixed $value Field value.
-	 * @param array $field Field settings.
+	 * @param array $args
 	 *
 	 * @return string        Output.
 	 */
-	public static function from($value, array $field, $raw = true ): string {
-		if ( empty( $value ) ) {
+	public static function from(array $args = []): string {
+		if ( empty( $args['value'] ) ) {
 			return '';
 		}
 		
+		$field = $args['field'] ?? [];
+		
 		$template = self::get_template( $field['type'] );
-		$template = new $template( $value, $field, $raw );
+		$template = new $template($args);
+		
 		$rendered = $template->render();
 
 		return et_core_esc_previously( $rendered );

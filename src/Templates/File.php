@@ -9,11 +9,13 @@ class File extends Base {
 		if ($this->raw) {
 			return $value[0][0]['name'];
 		}
+		
+		$items_per_row = $this->attrs['items_per_row'] ?? 3;
 
-		$output = '<div class="mbdi-file-wrapper">';
+		$output = '<div class="mbdi-files-wrapper">';
 
 		foreach ($value as $files) {
-			$output .= '<ul class="mbdi-file-group">';
+			$output .= '<ul class="mbdi-files-group mbdi-grid mbdi-grid-cols-'.$items_per_row.'">';
 			
 			foreach ($files as $file) {
 				$output .= '<li><a href="' . esc_url( $file['url'] ) . '" title="' . esc_attr( $file['name'] ?? '' ) . '">'. $file['name'] .'</a></li>';

@@ -35,6 +35,21 @@ class MBDI_Field extends ET_Builder_Module
                 'description' => esc_html__('Select a field to display.', 'mbdi'),
                 'toggle_slug' => 'main_content',
             ],
+            'items_per_row' => [
+                'label' => esc_html__('Items Per Row', 'mbdi'),
+                'type' => 'select',
+                'options' => [
+                    '1' => esc_html__('1', 'mbdi'),
+                    '2' => esc_html__('2', 'mbdi'),
+                    '3' => esc_html__('3', 'mbdi'),
+                    '4' => esc_html__('4', 'mbdi'),
+                    '5' => esc_html__('5', 'mbdi'),
+                    '6' => esc_html__('6', 'mbdi'),
+                ],
+                'option_category' => 'basic_option',
+                'description' => esc_html__('Select the number of items to display per row.', 'mbdi'),
+                'toggle_slug' => 'main_content',
+            ]
         ];
     }
 
@@ -107,7 +122,12 @@ class MBDI_Field extends ET_Builder_Module
             return;
         }
 
-        return Output::from($field_value, $field, false);
+        return Output::from([
+            'value' => $field_value,
+            'field' => $field,
+            'attrs' => $attrs,
+            'raw'   => false,
+        ]);
     }
 
     private function get_nested_value($meta_key, $field_registry, $sub_type, $object_type, $args, $identifier, $index = 0)

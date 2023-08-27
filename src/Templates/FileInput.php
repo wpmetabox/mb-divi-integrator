@@ -18,9 +18,11 @@ class FileInput extends File {
 		if ($this->raw) {
 			return $value[0];
 		}
+		
+		$items_per_row = $this->attrs['items_per_row'] ?? 3;
 
 		$output = '<div class="mbdi-file-wrapper">';
-		$output .= '<ul class="mbdi-file-group">';
+		$output .= '<ul class="mbdi-file-group mbdi-grid mbdi-grid-cols-'.$items_per_row.'">';
 		
 		foreach ($value as $file) {
 			$output .= '<li><a href="' . esc_url( $file ) . '" title="' . esc_attr( $file ) . '">'. $file .'</a></li>';

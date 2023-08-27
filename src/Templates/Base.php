@@ -25,15 +25,23 @@ abstract class Base {
 	protected $raw;
 
 	/**
+	 * Attributes.
+	 *
+	 * @var array
+	 */
+	protected $attrs;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param string|array|object $value Value retrieved from meta box.
 	 * @param array $field Field settings.
 	 */
-	public function __construct($value, array $field, $raw = true ) {
-		$this->value = $value;
-		$this->field = $field;
-		$this->raw = $raw;
+	public function __construct($args = []) {
+		$this->value = $args['value'];
+		$this->field = $args['field'] ?? [];
+		$this->raw = $args['raw'] ?? true;
+		$this->attrs = $args['attrs'] ?? [];
 	}
 
 	/**
