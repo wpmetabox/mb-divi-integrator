@@ -16,7 +16,7 @@ class Output {
 		}
 		
 		$field = $args['field'] ?? [];
-		
+
 		$template = self::get_template( $field['type'] );
 		$template = new $template($args);
 		

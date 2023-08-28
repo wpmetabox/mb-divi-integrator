@@ -16,10 +16,11 @@ class Image extends Base {
 		}
 
 		$items_per_row = $this->attrs['items_per_row'] ?? 3;
+		
 		$output = '<div class="mbdi-images-wrapper">';
 
 		foreach ($value as $images) {
-			$output .= '<ul class="mbdi-images-group mbdi-grid mbdi-grid-columns-'. $items_per_row .'">';
+			$output .= '<ul class="mbdi-images-group mbdi-grid mbdi-grid-cols-'. $items_per_row .'">';
 			
 			foreach ($images as $image) {
 				$output .= '<li><img src="' . esc_url( $image['full_url'] ) . '" alt="' . esc_attr( $image['alt'] ?? '' ) . '" /></li>';
