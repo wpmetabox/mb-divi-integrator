@@ -46,6 +46,7 @@ class MBDI_Field extends ET_Builder_Module
                     '5' => esc_html__('5', 'mbdi'),
                     '6' => esc_html__('6', 'mbdi'),
                 ],
+                'default' => '1',
                 'option_category' => 'basic_option',
                 'description' => esc_html__('Select the number of items to display per row.', 'mbdi'),
                 'toggle_slug' => 'main_content',

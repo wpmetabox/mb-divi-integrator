@@ -10,7 +10,7 @@ class File extends Base {
 			return $value[0][0]['name'];
 		}
 		
-		$items_per_row = $this->attrs['items_per_row'] ?? 3;
+		$items_per_row = $this->attrs['items_per_row'] ?? 1;
 
 		$output = '<div class="mbdi-files-wrapper">';
 

@@ -19,7 +19,7 @@ class FileInput extends File {
 			return $value[0];
 		}
 		
-		$items_per_row = $this->attrs['items_per_row'] ?? 3;
+		$items_per_row = $this->attrs['items_per_row'] ?? 1;
 
 		$output = '<div class="mbdi-file-wrapper">';
 		$output .= '<ul class="mbdi-file-group mbdi-grid mbdi-grid-cols-'.$items_per_row.'">';
