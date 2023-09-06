@@ -12,8 +12,12 @@
 // Prevent loading this file directly.
 defined( 'ABSPATH' ) || die;
 
-require __DIR__ . '/vendor/autoload.php';
+if ( ! defined( 'MBDI_PATH' ) ) {
+	if ( file_exists( __DIR__ . '/vendor' ) ) {
+		require __DIR__ . '/vendor/autoload.php';
+	}
 
-define('MBDI_PATH', plugin_dir_path(__FILE__));
+	define( 'MBDI_PATH', plugin_dir_path( __FILE__ ) );
 
-new MBDI\Main;
+	new MBDI\Main;
+}
