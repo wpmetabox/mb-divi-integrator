@@ -7,7 +7,9 @@ class Main {
 	public function __construct() {
 		add_action( 'init', [ $this, 'init' ], 20 );
 
-		add_action( 'divi_extensions_init', fn () => new Extension );
+		add_action( 'divi_extensions_init', function () {
+			new Extension();
+		} );
 	}
 
 	public function init(): void {
