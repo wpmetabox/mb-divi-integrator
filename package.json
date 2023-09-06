@@ -1,7 +1,4 @@
 {
-  "name": "mb-group",
-  "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "divi-scripts": "1.0.3",
     "react": "^18.2.0",

@@ -1,6 +1,6 @@
 {
     "name": "wpmetabox/mb-divi-integrator",
-    "description": "Connect Meta Box data with Divi Dynamic Content",
+    "description": "Display Meta Box data in Divi",
     "type": "wordpress-plugin",
     "license": "GPL-3.0",
     "autoload": {
