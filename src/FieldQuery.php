@@ -88,7 +88,7 @@ class FieldQuery {
 				$output   = array_merge( $output, $children );
 			}
 
-			if ( in_array( $field['type'], $this->unsupported_fields ) ) {
+			if ( in_array( $field['type'], $this->unsupported_fields, true ) ) {
 				continue;
 			}
 
@@ -105,7 +105,7 @@ class FieldQuery {
 				}
 			}
 
-			if ( isset( $this->filters['not_type'] ) && in_array( $field['type'], $this->filters['not_type'] ) ) {
+			if ( isset( $this->filters['not_type'] ) && in_array( $field['type'], $this->filters['not_type'], true ) ) {
 				continue;
 			}
 

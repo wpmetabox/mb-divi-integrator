@@ -240,7 +240,7 @@ class Main {
 						],
 						// Set enable_html default to `on` for taxonomy fields so builder
 						// automatically renders taxonomy list properly as unescaped HTML.
-						'default' => in_array( $field['type'], [ 'taxonomy', 'taxonomy_advanced' ] ) ? 'on' : 'off',
+						'default' => in_array( $field['type'], [ 'taxonomy', 'taxonomy_advanced' ], true ) ? 'on' : 'off',
 						'show_on' => 'text',
 					];
 				}
@@ -260,7 +260,7 @@ class Main {
 	 * @return bool
 	 */
 	protected function is_field_supported( array $field ): bool {
-		return ! in_array( $field['type'], [ 'divider', 'heading', 'tab', 'group' ] );
+		return ! in_array( $field['type'], [ 'divider', 'heading', 'tab', 'group' ], true );
 	}
 
 	/**
@@ -269,11 +269,11 @@ class Main {
 	 * Fields in groups will have their label prefixed with the group label. For example: "Group: Field".
 	 *
 	 * @param array  $fields
-	 * @param string $label_prefix Prefix for field label. Used for group fields.
+	 * @param array  $parent Prefix for field label. Used for group fields.
 	 *
 	 * @return array
 	 */
-	protected function flatten( array $fields, array $parent = null ): array {
+	protected function flatten( array $fields, array $parent = [] ): array {
 		$output = [];
 
 		foreach ( $fields as $field ) {
@@ -283,7 +283,7 @@ class Main {
 			}
 
 			// Add prefix to field label. Top level fields will not have a prefix.
-			if ( ! in_array( $field['type'], [ 'tab', 'group' ] ) ) {
+			if ( ! in_array( $field['type'], [ 'tab', 'group' ], true ) ) {
 				$field['meta_key'] = $field['id'];
 
 				if ( $parent ) {

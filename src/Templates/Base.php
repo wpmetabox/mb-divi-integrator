@@ -34,8 +34,7 @@ abstract class Base {
 	/**
 	 * Constructor.
 	 *
-	 * @param string|array|object $value Value retrieved from meta box.
-	 * @param array               $field Field settings.
+	 * @param string|array|object $args Value retrieved from meta box.
 	 */
 	public function __construct( $args = [] ) {
 		$this->value = $args['value'];

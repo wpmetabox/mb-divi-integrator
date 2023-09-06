@@ -35,14 +35,7 @@ class Extension extends \DiviExtension {
 	 */
 	public $version = '1.0.0';
 
-	/**
-	 *
-	 * @param string $name
-	 * @param array  $args
-	 */
 	public function __construct( $name = 'mb-divi-integrator', $args = [] ) {
-		// define('MBDI\EXTENSION_DEBUG', true);
-
 		$this->plugin_dir     = MBDI_PATH . 'includes';
 		$this->plugin_dir_url = plugin_dir_url( $this->plugin_dir );
 

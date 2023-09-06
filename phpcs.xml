@@ -61,6 +61,8 @@
 		<exclude name="PEAR.Functions.FunctionCallSignature.CloseBracketLine" />
 		<exclude name="PEAR.Functions.FunctionCallSignature.MultipleArguments" />
 		<exclude name="WordPress.PHP.YodaConditions.NotYoda" />
+		<exclude name="Squiz.Commenting.FunctionComment.MissingParamComment" />
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter" />
 	</rule>
 
 	<rule ref="Generic.Arrays.DisallowLongArraySyntax" />
