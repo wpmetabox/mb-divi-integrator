@@ -5,95 +5,92 @@ namespace MBDI;
 /**
  * The Divi Integrator extension.
  */
-class Extension extends \DiviExtension
-{
+class Extension extends \DiviExtension {
 
-    /**
-     * The gettext domain for the extension's translations.
-     *
-     * @since 1.0.0
-     *
-     * @var string
-     */
-    public $gettext_domain = 'mb-divi-integrator';
 
-    /**
-     * The extension's WP Plugin name.
-     *
-     * @since 1.0.0
-     *
-     * @var string
-     */
-    public $name = 'mb-divi-integrator';
+	/**
+	 * The gettext domain for the extension's translations.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	public $gettext_domain = 'mb-divi-integrator';
 
-    /**
-     * The extension's version
-     *
-     * @since 1.0.0
-     *
-     * @var string
-     */
-    public $version = '1.0.0';
+	/**
+	 * The extension's WP Plugin name.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	public $name = 'mb-divi-integrator';
 
-    /**
-     *
-     * @param string $name
-     * @param array  $args
-     */
-    public function __construct($name = 'mb-divi-integrator', $args = [])
-    {
-        // define('MBDI\EXTENSION_DEBUG', true);
-        
-        $this->plugin_dir     = MBDI_PATH . 'includes';
-        $this->plugin_dir_url = plugin_dir_url($this->plugin_dir);
-        
-        add_action('wp_ajax_mb_divi_integrator_get_fields', [$this, 'ajax_get_fields']);
+	/**
+	 * The extension's version
+	 *
+	 * @since 1.0.0
+	 *
+	 * @var string
+	 */
+	public $version = '1.0.0';
 
-        parent::__construct($name, $args);
-    }
+	/**
+	 *
+	 * @param string $name
+	 * @param array  $args
+	 */
+	public function __construct( $name = 'mb-divi-integrator', $args = [] ) {
+		// define('MBDI\EXTENSION_DEBUG', true);
 
-    public static function get_fields()
-    {
-        $layouts = get_posts([
-            'post_type' => 'et_pb_layout',
-            'posts_per_page' => -1,
-        ]);
+		$this->plugin_dir     = MBDI_PATH . 'includes';
+		$this->plugin_dir_url = plugin_dir_url( $this->plugin_dir );
 
-        $layout_options = [];
-        $layout_options[0] = esc_html__('Select a layout', 'mbdi');
+		add_action( 'wp_ajax_mb_divi_integrator_get_fields', [ $this, 'ajax_get_fields' ] );
 
-        foreach ($layouts as $layout) {
-            $layout_options[$layout->ID] = $layout->post_title;
-        }
+		parent::__construct( $name, $args );
+	}
 
-        // Get all cloneable fields from Meta Box.
-        $cloneable_query = new FieldQuery([
-            'clone' => true,
-        ]);
+	public static function get_fields() {
+		$layouts = get_posts([
+			'post_type'      => 'et_pb_layout',
+			'posts_per_page' => -1,
+		]);
 
-        $cloneable_fields = $cloneable_query->pluck('name', 'id');
-        $cloneable_field_options = array_merge(['' => esc_html__('Select a field', 'mbdi')], $cloneable_fields);
+		$layout_options    = [];
+		$layout_options[0] = esc_html__( 'Select a layout', 'mbdi' );
 
-        // Get all fields from Meta Box.
-        $query = new FieldQuery([
-            'not_type' => ['group'],
-        ]);
+		foreach ( $layouts as $layout ) {
+			$layout_options[ $layout->ID ] = $layout->post_title;
+		}
 
-        $fields = $query->pluck('name', 'id');
-        $field_options = array_merge(['' => esc_html__('Select a field', 'mbdi')], $fields);
+		// Get all cloneable fields from Meta Box.
+		$cloneable_query = new FieldQuery([
+			'clone' => true,
+		]);
 
-        return compact('layout_options', 'cloneable_field_options', 'field_options');
-    }
+		$cloneable_fields        = $cloneable_query->pluck( 'name', 'id' );
+		$cloneable_field_options = array_merge( [ '' => esc_html__( 'Select a field', 'mbdi' ) ], $cloneable_fields );
 
-    /**
-     * Get the extension's fields.
-     *
-     * @since 1.0.0
-     *
-     * @return array
-     */
-    public function ajax_get_fields()
-    {
-        wp_send_json_success(self::get_fields());
-    }
+		// Get all fields from Meta Box.
+		$query = new FieldQuery([
+			'not_type' => [ 'group' ],
+		]);
+
+		$fields        = $query->pluck( 'name', 'id' );
+		$field_options = array_merge( [ '' => esc_html__( 'Select a field', 'mbdi' ) ], $fields );
+
+		return compact( 'layout_options', 'cloneable_field_options', 'field_options' );
+	}
+
+	/**
+	 * Get the extension's fields.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	public function ajax_get_fields() {
+		wp_send_json_success( self::get_fields() );
+	}
 }

@@ -4,8 +4,8 @@ namespace MBDI\Templates;
 
 class Heading extends Base {
 	public function render(): string {
-        $field = $this->get_field();
+		$field = $this->get_field();
 
-        return "<h3>{$field['name']}</h3>\n";
-    }
+		return "<h3>{$field['name']}</h3>\n";
+	}
 }

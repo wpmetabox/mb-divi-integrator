@@ -10,16 +10,16 @@ class Output {
 	 *
 	 * @return string        Output.
 	 */
-	public static function from(array $args = []): string {
+	public static function from( array $args = [] ): string {
 		if ( empty( $args['value'] ) ) {
 			return '';
 		}
-		
+
 		$field = $args['field'] ?? [];
 
 		$template = self::get_template( $field['type'] );
-		$template = new $template($args);
-		
+		$template = new $template( $args );
+
 		$rendered = $template->render();
 
 		return et_core_esc_previously( $rendered );
@@ -35,7 +35,7 @@ class Output {
 	protected static function get_template( string $type ): string {
 		$type     = str_replace( ' ', '', ucwords( str_replace( '_', ' ', $type ) ) );
 		$template = __NAMESPACE__ . '\\Templates\\' . $type;
-		
+
 		if ( class_exists( $template ) ) {
 			return $template;
 		}
