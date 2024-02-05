@@ -1,5 +1,5 @@
 <?php
-
+defined( 'ABSPATH' ) || die;
 use MBDI\Extension;
 
 class MBDI_Clonable extends ET_Builder_Module
