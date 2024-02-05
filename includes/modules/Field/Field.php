@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || die;
 
 use MBDI\Extension;
 use MBDI\FieldQuery;

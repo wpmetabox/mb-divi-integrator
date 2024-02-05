@@ -1,6 +1,6 @@
 <?php
-
 namespace MBDI\Templates;
+defined( 'ABSPATH' ) || die;
 
 abstract class Base {
 	/**

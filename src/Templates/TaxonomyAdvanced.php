@@ -1,6 +1,7 @@
 <?php
 
 namespace MBDI\Templates;
+defined( 'ABSPATH' ) || die;
 
 class TaxonomyAdvanced extends Base {
 	public function render(): string {

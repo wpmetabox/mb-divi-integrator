@@ -1,6 +1,6 @@
 <?php
-
 namespace MBDI;
+defined( 'ABSPATH' ) || die;
 
 /**
  * The Divi Integrator extension.

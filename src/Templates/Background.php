@@ -1,6 +1,6 @@
 <?php
-
 namespace MBDI\Templates;
+defined( 'ABSPATH' ) || die;
 
 class Background extends Base {
 	public function render(): string {

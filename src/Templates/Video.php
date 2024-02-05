@@ -1,6 +1,7 @@
 <?php
 
 namespace MBDI\Templates;
+defined( 'ABSPATH' ) || die;
 
 class Video extends Base {
 	public function render(): string {
