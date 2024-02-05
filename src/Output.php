@@ -1,6 +1,5 @@
 <?php
 namespace MBDI;
-defined( 'ABSPATH' ) || die;
 
 class Output {
 	/**

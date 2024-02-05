@@ -1,7 +1,6 @@
 <?php
 
 namespace MBDI\Templates;
-defined( 'ABSPATH' ) || die;
 
 class Text extends Base {
 	public function render(): string {

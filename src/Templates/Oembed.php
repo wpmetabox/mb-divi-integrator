@@ -1,7 +1,6 @@
 <?php
 
 namespace MBDI\Templates;
-defined( 'ABSPATH' ) || die;
 
 class Oembed extends Text {
 	public function render(): string {
