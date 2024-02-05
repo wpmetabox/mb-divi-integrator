@@ -1,4 +1,5 @@
 <?php
+
 namespace MBDI\Templates;
 
 abstract class Base {
