@@ -268,8 +268,8 @@ class Main {
 	 * This is used to get all fields in a meta box, including fields in groups into a single dimensional array.
 	 * Fields in groups will have their label prefixed with the group label. For example: "Group: Field".
 	 *
-	 * @param array  $fields
-	 * @param array  $parent Prefix for field label. Used for group fields.
+	 * @param array $fields
+	 * @param array $parent Prefix for field label. Used for group fields.
 	 *
 	 * @return array
 	 */
