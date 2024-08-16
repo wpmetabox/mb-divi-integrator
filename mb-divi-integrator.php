@@ -11,7 +11,9 @@
  */
 
 // Prevent loading this file directly.
-defined( 'ABSPATH' ) || die;
+if ( ! defined( 'ABSPATH' ) ) {
+	return;
+}
 
 if ( ! defined( 'MBDI_PATH' ) ) {
 	if ( file_exists( __DIR__ . '/vendor' ) ) {
