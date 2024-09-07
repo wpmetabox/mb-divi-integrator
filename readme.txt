@@ -4,8 +4,8 @@ Donate link: https://metabox.io/pricing/
 Tags: meta box, custom meta box, meta boxes, custom meta boxes, custom fields, custom field, divi, dynamic tags
 Requires at least: 5.9
 Requires PHP: 7.2
-Tested up to: 6.4.3
-Stable tag: 1.0.1
+Tested up to: 6.6.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 
 Integrates Meta Box's custom fields with Divi page builder via dynamic content and custom modules.
@@ -55,6 +55,9 @@ Install **MB Divi Integrator** extension
 == Screenshots ==
 
 == Changelog ==
+
+= 1.0.2 - 2024-09-07 =
+- Fix: deprecated messages
 
 = 1.0.1 - 2024-08-19 =
 - Prevent direct access to plugin's PHP files
