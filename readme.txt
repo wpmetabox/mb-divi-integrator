@@ -1,10 +1,10 @@
 === MB Divi Integrator ===
 Contributors: elightup, metabox, tannt
 Donate link: https://metabox.io/pricing/
-Tags: meta box, custom meta box, meta boxes, custom meta boxes, custom fields, custom field, divi, dynamic tags
+Tags: meta box, divi, dynamic tags, integration
 Requires at least: 5.9
 Requires PHP: 7.2
-Tested up to: 6.4.3
+Tested up to: 6.6.2
 Stable tag: 1.0.0
 License: GPLv2 or later
 
