@@ -155,6 +155,7 @@ class Main {
 
 		$value = esc_html(
 			sprintf(
+				/* translators: %1$s - field label */
 				__( 'Your "%1$s" Meta Box Field Value Will Display Here', 'mbdi' ),
 				$field['label']
 			)
@@ -225,7 +226,7 @@ class Main {
 							'show_on' => 'text',
 						],
 					],
-					'meta_key' => $field['meta_key'],
+					'meta_key' => $field['meta_key'], // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- false positive, not a meta query.
 					'custom'   => true,
 					'group'    => 'Meta Box: ' . $meta_box['title'],
 				];
@@ -284,11 +285,11 @@ class Main {
 
 			// Add prefix to field label. Top level fields will not have a prefix.
 			if ( ! in_array( $field['type'], [ 'tab', 'group' ], true ) ) {
-				$field['meta_key'] = $field['id'];
+				$field['meta_key'] = $field['id']; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- false positive, not a meta query.
 
 				if ( $parent ) {
 					$field['name']     = $parent['name'] . ': ' . $field['name'];
-					$field['meta_key'] = $parent['id'] . '.' . $field['id'];
+					$field['meta_key'] = $parent['id'] . '.' . $field['id']; // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_key -- false positive, not a meta query.
 				}
 
 				$output[] = $field;
