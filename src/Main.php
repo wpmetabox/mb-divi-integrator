@@ -153,10 +153,10 @@ class Main {
 			return esc_html__( 'Your Meta Box Field Value Will Display Here', 'mbdi' );
 		}
 
-		/* translators: %s: field label */
 		$value = esc_html(
 			sprintf(
-				__( 'Your "%1$s" Meta Box Field Value Will Display Here', 'mbdi' ), // phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment, WordPress.WP.I18n.UnorderedPlaceholdersText
+				/* translators: %1$s - field label */
+				__( 'Your "%1$s" Meta Box Field Value Will Display Here', 'mbdi' ),
 				$field['label']
 			)
 		);
