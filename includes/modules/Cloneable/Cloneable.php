@@ -44,7 +44,7 @@ class MBDI_Clonable extends ET_Builder_Module {
 		];
 	}
 
-	public function render( $attrs, $content = null, $render_slug ) {
+	public function render( $attrs, $content, $render_slug ) {
 		global $wp_query;
 		$post_id = $wp_query->get_queried_object_id();
 

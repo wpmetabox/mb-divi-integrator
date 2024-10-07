@@ -53,7 +53,7 @@ class MBDI_Field extends ET_Builder_Module {
 		];
 	}
 
-	public function render( $attrs, $content = null, $render_slug ) {
+	public function render( $attrs, $content, $render_slug ) {
 		global $wp_query;
 
 		$index = $attrs['index'] ?? null;
