@@ -1,13 +1,12 @@
 <?php
 /**
- * Plugin Name:      MB Divi Integrator
- * Plugin URI:       https://metabox.io/plugins/mb-divi-integrator/
- * Description:      Integrates Meta Box and Divi Page Builder.
- * Version:          1.0.2
- * Author:           MetaBox.io
- * Author URI:       https://metabox.io
- * License:          GPL2+
- * Requires Plugins: meta-box
+ * Plugin Name: MB Divi Integrator
+ * Plugin URI:  https://metabox.io/plugins/mb-divi-integrator/
+ * Description: Integrates Meta Box and Divi Page Builder.
+ * Version:     1.0.3
+ * Author:      MetaBox.io
+ * Author URI:  https://metabox.io
+ * License:     GPL2+
  */
 
 // Prevent loading this file directly.
