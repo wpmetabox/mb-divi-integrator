@@ -1,11 +1,11 @@
-=== MB Divi Integrator ===
-Contributors: elightup, metabox, tannt
+=== MB Divi Integration ===
+Contributors: elightup, metabox
 Donate link: https://metabox.io/pricing/
 Tags: meta box, divi, dynamic tags, integration
 Requires at least: 5.9
 Requires PHP: 7.2
 Tested up to: 6.6.2
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 
 Integrates Meta Box's custom fields with Divi page builder via dynamic content and custom modules.
@@ -44,9 +44,9 @@ You need to install [Meta Box](https://metabox.io) plugin first
 - Click **Install Now** button to install the plugin
 - After installing, click **Activate Plugin** to activate the plugin
 
-Install **MB Divi Integrator** extension
+Install **MB Divi Integration** extension
 
-- Go to **Plugins | Add New** and search for **MB Divi Integrator**
+- Go to **Plugins | Add New** and search for **MB Divi Integration**
 - Click **Install Now** button to install the plugin
 - After installing, click **Activate Plugin** to activate the plugin
 
@@ -56,11 +56,14 @@ Install **MB Divi Integrator** extension
 
 == Changelog ==
 
+= 1.0.4 - 2024-10-14 =
+Update plugin name
+
 = 1.0.3 - 2024-10-07 =
 Fix issues by Plugin Check
 
 = 1.0.2 - 2024-09-07 =
-- Fix: deprecated messages
+Fix: deprecated messages
 
 = 1.0.1 - 2024-08-19 =
 - Prevent direct access to plugin's PHP files

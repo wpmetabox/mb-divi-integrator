@@ -1,10 +1,10 @@
-# MB Divi Integrator
+# MB Divi Integration
 Meta Box Divi Builder Integration
 
 ## Installation
 You need to install [Meta Box](https://wordpress.org/plugins/meta-box/) plugin first
 
-Then install MB Divi Integrator extension
+Then install MB Divi Integration extension
 
 ## Usage
 This extension does two things:
@@ -54,7 +54,7 @@ To use this module:
 - Add new module to the page.
 - Choose "Meta Box Cloneable" module.
 - Choose the layout you created in step 1.
-- Choose the cloneable field that you want to repeat. 
+- Choose the cloneable field that you want to repeat.
 ![Meta Box Cloneable settings](./images/meta-box-cloneable-settings.png)
 
 ## Development
@@ -75,7 +75,7 @@ To use this module:
 ```
 
 ### Divi Modules
-Divi uses React to build the UI. It setups it own scripts `divi-scripts` same as `create-react-app` and uses `webpack` to build the scripts. 
+Divi uses React to build the UI. It setups it own scripts `divi-scripts` same as `create-react-app` and uses `webpack` to build the scripts.
 
 Requirements:
 - Node.js 14.x *(higher version doesn't works!!!)*
