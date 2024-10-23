@@ -1,5 +1,7 @@
 <?php
-defined( 'ABSPATH' ) || die;
+if ( ! defined( 'ABSPATH' ) ) {
+	return;
+}
 
 if ( ! class_exists( 'ET_Builder_Element' ) ) {
 	return;
