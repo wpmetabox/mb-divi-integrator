@@ -14,6 +14,9 @@ Integrates Meta Box's custom fields with Divi page builder via dynamic content a
 
 Easily select and show custom fields created by [Meta Box](https://metabox.io) in the Divi page builder via dynamic content or custom modules.
 
+> **Meta Box Lite**
+> We recommend using [Meta Box Lite](https://metabox.io/lite/), a feature-rich free UI version of Meta Box that provides UI and all free features for managing custom fields and dynamic content on WordPress, including post types, taxonomies, custom fields, and relationships.
+
 The plugin works for all field types. And you don't have to remember the field name or field ID to type. You just need to select it from the dropdown list.
 
 **Video demo**:

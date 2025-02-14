@@ -6,6 +6,9 @@ You need to install [Meta Box](https://wordpress.org/plugins/meta-box/) plugin f
 
 Then install MB Divi Integration extension
 
+> **Meta Box Lite**<br>
+> We recommend using [Meta Box Lite](https://metabox.io/lite/), a feature-rich free UI version of Meta Box that provides UI and all free features for managing custom fields and dynamic content on WordPress, including post types, taxonomies, custom fields, and relationships.
+
 ## Usage
 This extension does two things:
 - Adds new Dynamic Content source from Meta Box fields.
