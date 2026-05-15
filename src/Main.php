@@ -11,9 +11,13 @@ class Main {
 			new Extension();
 		} );
 
+		/** Load D4 module classes early for D5 backward-compatibility mode */
 		add_action( 'et_builder_ready', [ $this, 'load_d4_modules' ] );
 	}
 
+	/**
+	 * Load D4 Divi module classes (Field + Cloneable) so their shortcodes are registered in time for D5's shortcode-module BC layer.
+	 */
 	public function load_d4_modules(): void {
 		if ( ! defined( 'RWMB_VER' ) ) {
 			return;
@@ -39,6 +43,7 @@ class Main {
 			'maybe_filter_dynamic_content_fields',
 		], 10, 3);
 
+		/** Register native D5 modules when running under Divi 5 */
 		if ( function_exists( 'et_builder_d5_enabled' ) && et_builder_d5_enabled() ) {
 			D5\D5::init();
 		}
