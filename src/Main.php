@@ -10,6 +10,16 @@ class Main {
 		add_action( 'divi_extensions_init', function () {
 			new Extension();
 		} );
+
+		add_action( 'et_builder_ready', [ $this, 'load_d4_modules' ] );
+	}
+
+	public function load_d4_modules(): void {
+		if ( ! defined( 'RWMB_VER' ) ) {
+			return;
+		}
+
+		require_once MBDI_PATH . 'includes/loader.php';
 	}
 
 	public function init(): void {
@@ -28,6 +38,10 @@ class Main {
 			$this,
 			'maybe_filter_dynamic_content_fields',
 		], 10, 3);
+
+		if ( function_exists( 'et_builder_d5_enabled' ) && et_builder_d5_enabled() ) {
+			D5\D5::init();
+		}
 	}
 
 	/**
