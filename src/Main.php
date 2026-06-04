@@ -4,6 +4,8 @@ namespace MBDI;
 
 class Main {
 
+	private const FILE_FIELD_TYPES = [ 'image', 'single_image', 'image_advanced', 'image_select', 'image_upload', 'file', 'file_advanced', 'file_upload' ];
+
 	public function __construct() {
 		add_action( 'init', [ $this, 'init' ], 20 );
 
@@ -124,6 +126,11 @@ class Main {
 			return $meta_value;
 		}
 
+		// Handle file type first
+		if ( is_array( $field ) && in_array( $field['type'] ?? '', self::FILE_FIELD_TYPES, true ) ) {
+			return $this->get_image_url( $meta_box_value );
+		}
+
 		$meta_box_value = $this->format_field_value( $meta_box_value, $field );
 
 		if ( is_array( $meta_box_value ) || is_object( $meta_box_value ) ) {
@@ -182,6 +189,13 @@ class Main {
 
 		switch ( $field['type'] ) {
 			case 'image':
+			case 'single_image':
+			case 'image_advanced':
+			case 'image_select':
+			case 'image_upload':
+			case 'file':
+			case 'file_advanced':
+			case 'file_upload':
 				$value = ET_BUILDER_PLACEHOLDER_LANDSCAPE_IMAGE_DATA;
 				break;
 
@@ -220,17 +234,19 @@ class Main {
 
 		foreach ( $meta_boxes as $meta_box ) {
 			$meta_box = $meta_box->meta_box;
-
-			$fields = $this->flatten( $meta_box['fields'] );
+			$fields   = $this->flatten( $meta_box['fields'] );
 
 			foreach ( $fields as $field ) {
 				if ( ! $this->is_field_supported( $field ) ) {
 					continue;
 				}
 
+				$divi_type = in_array( $field['type'], self::FILE_FIELD_TYPES, true ) ? 'image' : 'any';
+
+
 				$settings = [
 					'label'    => esc_html( $field['name'] ),
-					'type'     => 'any',
+					'type'     => $divi_type,
 					'fields'   => [
 						'before' => [
 							'label'   => et_builder_i18n( 'Before' ),
@@ -270,6 +286,32 @@ class Main {
 		}
 
 		return $custom_fields;
+	}
+
+	/**
+	* Get image URL from MB image field.
+	*
+	* @param mixed $value
+	* @return string
+	*/
+	protected function get_image_url( $value ): string {
+		// Handle image_advanced (multiple) → array of image arrays, get first image
+		if ( is_array( $value ) && ! isset( $value['url'] ) ) {
+			$value = reset( $value );
+		}
+
+		// Handle single_image
+		if ( is_array( $value ) ) {
+			return (string) ( $value['url'] ?? $value['src'] ?? $value['full_url'] ?? '' );
+		}
+
+		// Handle attachment ID
+		if ( is_numeric( $value ) && (int) $value > 0 ) {
+			$src = wp_get_attachment_image_src( (int) $value, 'full' );
+			return $src ? (string) $src[0] : '';
+		}
+
+		return is_string( $value ) ? $value : '';
 	}
 
 	/**
