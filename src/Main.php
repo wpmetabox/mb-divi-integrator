@@ -45,6 +45,8 @@ class Main {
 			'maybe_filter_dynamic_content_fields',
 		], 10, 3);
 
+		add_filter( 'get_post_metadata', [ $this, 'intercept_image_meta_for_d5' ], 10, 4 );
+
 		/** Register native D5 modules when running under Divi 5 */
 		if ( function_exists( 'et_builder_d5_enabled' ) && et_builder_d5_enabled() ) {
 			D5\D5::init();
@@ -312,6 +314,34 @@ class Main {
 		}
 
 		return is_string( $value ) ? $value : '';
+	}
+
+	/**
+	 * Divi5 call get_post_meta() raw to get dynamic content value to ID
+	 * we hook here to convert attachment ID to URL
+	*/
+	public function intercept_image_meta_for_d5( $value, $post_id, $meta_key, $single ) {
+		// Run in Divi version 5 only
+		if ( ! function_exists( 'et_builder_d5_enabled' ) || ! et_builder_d5_enabled() ) {
+			return $value;
+		}
+
+		$post_type      = get_post_type( $post_id );
+		$field_registry = rwmb_get_registry( 'field' );
+		$field          = $field_registry->get( $meta_key, $post_type, 'post' );
+
+		if ( ! is_array( $field ) || ! in_array( $field['type'] ?? '', self::FILE_FIELD_TYPES, true ) ) {
+			return $value;
+		}
+
+		// Get post meta from ID
+		remove_filter( 'get_post_metadata', [ $this, 'intercept_image_meta_for_d5' ], 10 );
+		$raw = get_post_meta( $post_id, $meta_key, true );
+		add_filter( 'get_post_metadata', [ $this, 'intercept_image_meta_for_d5' ], 10, 4 );
+
+		$url = $this->get_image_url( $raw );
+
+		return $url ?: $value;
 	}
 
 	/**
