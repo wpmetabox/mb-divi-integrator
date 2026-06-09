@@ -8,11 +8,8 @@
             "MBDI\\": "src/"
         }
     },
-    "authors": [
-        {
-            "name": "Tan Nguyen",
-            "email": "tannt.com@gmail.com"
-        }
-    ],
-    "minimum-stability": "stable"
+    "scripts": {
+    	"phpcs": "phpcs --standard=../meta-box-aio/phpcs.xml",
+    	"phpcbf": "phpcbf --standard=../meta-box-aio/phpcs.xml"
+    }
 }

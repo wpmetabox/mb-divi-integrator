@@ -8,6 +8,7 @@ asset-manifest.json
 .env.development.local
 .env.test.local
 .env.production.local
+.commandcode
 
 npm-debug.log*
 yarn-debug.log*

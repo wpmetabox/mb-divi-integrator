@@ -13,7 +13,7 @@ class Main {
 			new Extension();
 		} );
 
-		/** Load D4 module classes early for D5 backward-compatibility mode */
+		// Load D4 module classes early for D5 backward-compatibility mode.
 		add_action( 'et_builder_ready', [ $this, 'load_d4_modules' ] );
 	}
 
@@ -33,19 +33,19 @@ class Main {
 			return;
 		}
 
-		/** Render dynamic content placeholder and output */
-		add_filter('et_builder_dynamic_content_meta_value', [
+		// Render dynamic content placeholder and output.
+		add_filter( 'et_builder_dynamic_content_meta_value', [
 			$this,
 			'maybe_filter_dynamic_content_meta_value',
 		], 10, 3);
 
-		/** Add dynamic content fields */
-		add_filter('et_builder_custom_dynamic_content_fields', [
+		// Add dynamic content fields.
+		add_filter( 'et_builder_custom_dynamic_content_fields', [
 			$this,
 			'maybe_filter_dynamic_content_fields',
 		], 10, 3);
 
-		/** Register native D5 modules when running under Divi 5 */
+		// Register native D5 modules when running under Divi 5.
 		if ( function_exists( 'et_builder_d5_enabled' ) && et_builder_d5_enabled() ) {
 			add_filter( 'get_post_metadata', [ $this, 'intercept_image_meta_for_d5' ], 10, 4 );
 			D5\D5::init();
@@ -127,7 +127,7 @@ class Main {
 			return $meta_value;
 		}
 
-		// Handle file type first
+		// Handle file type first.
 		if ( is_array( $field ) && in_array( $field['type'] ?? '', self::FILE_FIELD_TYPES, true ) ) {
 			return $this->get_image_url( $meta_box_value );
 		}
@@ -162,7 +162,6 @@ class Main {
 			'raw'   => false,
 		]);
 	}
-
 
 	/**
 	 * Format a placeholder value based on the field type.
@@ -288,20 +287,20 @@ class Main {
 	}
 
 	/**
-	* Get image URL from MB image field.
-	*/
+	 * Get image URL from MB image field.
+	 */
 	private function get_image_url( $value ): string {
-		// Handle image_advanced (multiple) → array of image arrays, get first image
+		// Handle image_advanced (multiple) → array of image arrays, get first image.
 		if ( is_array( $value ) && ! isset( $value['url'] ) ) {
 			$value = reset( $value );
 		}
 
-		// Handle single_image
+		// Handle single_image.
 		if ( is_array( $value ) ) {
 			return (string) ( $value['url'] ?? $value['src'] ?? $value['full_url'] ?? '' );
 		}
 
-		// Handle attachment ID
+		// Handle attachment ID.
 		if ( is_numeric( $value ) && (int) $value > 0 ) {
 			return (string) wp_get_attachment_url( $value );
 		}
@@ -310,11 +309,11 @@ class Main {
 	}
 
 	/**
-	 * Divi5 call get_post_meta() raw to get dynamic content value to ID
-	 * We hook here to convert attachment ID to URL
-	*/
+	 * Divi 5 calls get_post_meta() raw to get dynamic content value as ID.
+	 * We hook here to convert attachment ID to URL.
+	 */
 	public function intercept_image_meta_for_d5( $value, $post_id, $meta_key, $single ) {
-		// If another filter has already overridden the value, return to avoid conflicts
+		// If another filter has already overridden the value, return to avoid conflicts.
 		if ( null !== $value ) {
 			return $value;
 		}
@@ -323,12 +322,12 @@ class Main {
 		$field_registry = rwmb_get_registry( 'field' );
 		$field          = $field_registry->get( $meta_key, $post_type, 'post' );
 
-		// Return if not MetaBox field or not file field type
+		// Return if not MetaBox field or not file field type.
 		if ( ! is_array( $field ) || ! in_array( $field['type'] ?? '', self::FILE_FIELD_TYPES, true ) ) {
 			return $value;
 		}
 
-		// Get post meta from ID
+		// Get post meta from ID.
 		remove_filter( 'get_post_metadata', [ $this, 'intercept_image_meta_for_d5' ], 10 );
 		$raw = get_post_meta( $post_id, $meta_key, true );
 		add_filter( 'get_post_metadata', [ $this, 'intercept_image_meta_for_d5' ], 10, 4 );
@@ -340,10 +339,6 @@ class Main {
 
 	/**
 	 * Check if a field is supported by Dynamic Content.
-	 *
-	 * @param array $field
-	 *
-	 * @return bool
 	 */
 	protected function is_field_supported( array $field ): bool {
 		return ! in_array( $field['type'], [ 'divider', 'heading', 'tab', 'group' ], true );
