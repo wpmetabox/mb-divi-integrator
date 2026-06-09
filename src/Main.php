@@ -39,11 +39,7 @@ class Main {
 			'maybe_filter_dynamic_content_meta_value',
 		], 10, 3);
 
-		// Add dynamic content fields.
-		add_filter( 'et_builder_custom_dynamic_content_fields', [
-			$this,
-			'maybe_filter_dynamic_content_fields',
-		], 10, 3);
+		add_filter( 'et_builder_custom_dynamic_content_fields', [ $this, 'register_fields' ] );
 
 		// Register native D5 modules when running under Divi 5.
 		if ( function_exists( 'et_builder_d5_enabled' ) && et_builder_d5_enabled() ) {
@@ -215,15 +211,7 @@ class Main {
 		return $value;
 	}
 
-	public function maybe_filter_dynamic_content_fields( $custom_fields, $post_id, $raw_custom_fields ) {
-		if ( ! $post_id || et_theme_builder_is_layout_post_type( get_post_type( $post_id ) ) ) {
-			$post_id = 0;
-		}
-
-		return $this->maybe_filter_dynamic_content_fields_from_groups( $custom_fields, $post_id, $raw_custom_fields );
-	}
-
-	public function maybe_filter_dynamic_content_fields_from_groups( $custom_fields, $post_id, $raw_custom_fields ) {
+	public function register_fields( array $custom_fields ): array {
 		$meta_box_registry = rwmb_get_registry( 'meta_box' );
 		$meta_boxes        = $meta_box_registry->all();
 
@@ -240,11 +228,9 @@ class Main {
 					continue;
 				}
 
-				$divi_type = in_array( $field['type'], self::FILE_FIELD_TYPES, true ) ? 'image' : 'any';
-
 				$settings = [
 					'label'    => esc_html( $field['name'] ),
-					'type'     => $divi_type,
+					'type'     => in_array( $field['type'], self::FILE_FIELD_TYPES, true ) ? 'image' : 'any',
 					'fields'   => [
 						'before' => [
 							'label'   => et_builder_i18n( 'Before' ),
@@ -354,7 +340,7 @@ class Main {
 	 *
 	 * @return array
 	 */
-	protected function flatten( array $fields, array $parent = [] ): array {
+	private function flatten( array $fields, array $parent = [] ): array {
 		$output = [];
 
 		foreach ( $fields as $field ) {
