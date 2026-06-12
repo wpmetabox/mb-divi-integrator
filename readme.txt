@@ -1,11 +1,11 @@
 === MB Divi Integration ===
-Contributors: elightup, metabox
+Contributors: elightup, metabox, rilwis, tanng
 Donate link: https://metabox.io/pricing/
 Tags: meta box, divi, dynamic tags, integration
-Requires at least: 5.9
-Requires PHP: 7.2
-Tested up to: 6.6.2
-Stable tag: 1.0.5
+Requires at least: 6.6
+Requires PHP: 7.4
+Tested up to: 7.0
+Stable tag: 1.0.6
 License: GPLv2 or later
 
 Integrates Meta Box's custom fields with Divi page builder via dynamic content and custom modules.
@@ -33,11 +33,10 @@ https://youtu.be/MLjecsFQdU4
 
 If you like this plugin, you might also like our other WordPress products:
 
-- [Slim SEO](https://wpslimseo.com): A fast, lightweight and full-featured SEO plugin for WordPress with minimal configuration.
-- [Slim SEO Schema](https://wpslimseo.com/products/slim-seo-schema/): An advanced schema builder plugin for WordPress.
-- [Slim SEO Link Manager](https://wpslimseo.com/products/slim-seo-link-manager/): Build internal link easier in WordPress with real-time reports.
-- [GretaThemes](https://gretathemes.com): Free and premium WordPress themes that clean, simple and just work.
-- [Auto Listings](https://wpautolistings.com): The car sale and dealership plugin for WordPress
+- [Slim SEO](https://wpslimseo.com) - A fast, lightweight and full-featured SEO plugin for WordPress with minimal configuration.
+- [Falcon](https://wpfalcon.pro) - A lightweight companion for making WordPress faster, cleaner, and more secure.
+- [GretaThemes](https://gretathemes.com) - Free and premium WordPress themes that clean, simple and just work.
+- [Auto Listings](https://wpautolistings.com) - A car sale and dealership plugin for WordPress.
 
 == Installation ==
 
@@ -58,6 +57,10 @@ Install **MB Divi Integration** extension
 == Screenshots ==
 
 == Changelog ==
+
+= 1.0.6 - 2026-06-12 =
+
+- Add support for Divi 5
 
 = 1.0.5 - 2024-11-01 =
 Fix direct file access

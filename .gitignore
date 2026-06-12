@@ -1,6 +1,7 @@
 node_modules
 asset-manifest.json
 *.map
+.commandcode
 
 # misc
 .DS_Store
