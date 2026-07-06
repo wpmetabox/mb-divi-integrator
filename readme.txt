@@ -5,7 +5,7 @@ Tags: meta box, divi, dynamic tags, integration
 Requires at least: 6.6
 Requires PHP: 7.4
 Tested up to: 7.0
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2 or later
 
 Integrates Meta Box's custom fields with Divi page builder via dynamic content and custom modules.
@@ -57,6 +57,10 @@ Install **MB Divi Integration** extension
 == Screenshots ==
 
 == Changelog ==
+
+= 1.0.7 - 2026-07-06 =
+
+- Fix image fields not displaying in Divi blurb and image fields
 
 = 1.0.6 - 2026-06-12 =
 
