@@ -1,3 +1,7 @@
+### 1.0.7 - 2026-07-06
+
+- fix: image fields not displaying in Divi blurb and image fields
+
 ### 1.0.6 - 2026-06-12
 
 - Add support for Divi 5
